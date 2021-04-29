@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_addFood"
+        android:title="@string/add_new_food_item"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_restaurant"
+        />
+    <item
+        android:id="@+id/action_addDailyProtein"
+        android:title="@string/add_new_daily_protein"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_baseline_add_24"
+    />
+</menu>
