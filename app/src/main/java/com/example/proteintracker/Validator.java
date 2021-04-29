@@ -8,8 +8,6 @@ public class Validator {
         if (!food.isEmpty()) {
             if (!protein.isEmpty()) {
                 double proteinDouble = Double.parseDouble(protein);
-                Log.d("Double String", protein);
-                Log.d("Double", String.valueOf(proteinDouble));
                 if (proteinDouble > 0) {
                     valid = true;
                 }

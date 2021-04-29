@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,8 +55,19 @@ public class addFoodFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view == submitButton) {
-            if (!Validator.validateFoodForm(foodName.getText().toString().trim(), proteinGrams.getText().toString().trim())) {
+            String foodNameString = foodName.getText().toString().trim();
+            String proteinString = proteinGrams.getText().toString().trim();
+            if (!Validator.validateFoodForm(foodNameString, proteinString)) {
                 Toast.makeText(requireContext(),"Food name or protein invalid. Please retry.", Toast.LENGTH_LONG).show();
+            } else {
+                double proteinDouble = Double.parseDouble(proteinString);
+                Food food = new Food(foodNameString, proteinDouble);
+                new Thread(() -> {
+                    AppDatabase db = AppDatabase.getInstance(requireContext());
+                    FoodDAO dao = db.foodDAO();
+                    dao.insertFood(food);
+                }).start();
+                Log.d("DB", "Food inserted");
             }
         }
     }
