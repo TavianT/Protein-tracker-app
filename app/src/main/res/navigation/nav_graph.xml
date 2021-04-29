@@ -10,5 +10,13 @@
         android:name="com.example.proteintracker.HomeFragment"
         android:label="Protein Tracker"
         tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_addFoodFragment"
+            app:destination="@id/addFoodFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/addFoodFragment"
+        android:name="com.example.proteintracker.addFoodFragment"
+        android:label="fragment_add_food"
+        tools:layout="@layout/fragment_add_food" />
 </navigation>

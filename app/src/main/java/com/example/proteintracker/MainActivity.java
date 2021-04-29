@@ -3,11 +3,13 @@ package com.example.proteintracker;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.navigation.Navigation;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.action_addFood:
                 Log.d("Action", "onOptionsItemSelected: addFood selected");
+                Navigation.findNavController(this, R.id.fragment).navigate(R.id.action_homeFragment_to_addFoodFragment);
                 break;
             default:
                 return super.onOptionsItemSelected(item);

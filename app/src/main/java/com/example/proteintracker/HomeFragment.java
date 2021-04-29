@@ -51,8 +51,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
-        addProteinButton = v.findViewById(R.id.addProteinButton);
-        addProteinButton.setOnClickListener(this);
         return v;
     }
 
