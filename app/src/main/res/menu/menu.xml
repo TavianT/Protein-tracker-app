@@ -8,7 +8,7 @@
         android:icon="@drawable/ic_restaurant"
         />
     <item
-        android:id="@+id/action_addDailyProtein"
+        android:id="@+id/action_viewDailyProtein"
         android:title="@string/add_new_daily_protein"
         app:showAsAction="always"
         android:icon="@drawable/ic_baseline_add_24"

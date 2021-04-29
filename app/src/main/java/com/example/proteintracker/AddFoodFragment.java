@@ -2,41 +2,43 @@ package com.example.proteintracker;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.proteintracker.Validator;
-
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link addFoodFragment#newInstance} factory method to
+ * Use the {@link AddFoodFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class addFoodFragment extends Fragment implements View.OnClickListener {
+public class AddFoodFragment extends Fragment implements View.OnClickListener {
 
     EditText foodName, proteinGrams;
     Button submitButton;
 
-    public addFoodFragment() {
+    public AddFoodFragment() {
         // Required empty public constructor
     }
 
     // TODO: Rename and change types and number of parameters
-    public static addFoodFragment newInstance(String param1, String param2) {
-        addFoodFragment fragment = new addFoodFragment();
+    public static AddFoodFragment newInstance(String param1, String param2) {
+        AddFoodFragment fragment = new AddFoodFragment();
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -68,7 +70,25 @@ public class addFoodFragment extends Fragment implements View.OnClickListener {
                     dao.insertFood(food);
                 }).start();
                 Log.d("DB", "Food inserted");
+                Toast.makeText(requireContext(),"Food added successfully", Toast.LENGTH_LONG).show();
+                foodName.setText("");
+                proteinGrams.setText("");
             }
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_viewDailyProtein:
+                try {
+                    Navigation.findNavController(requireView()).navigate(R.id.action_addFoodFragment_to_viewDailyProteinFragment);
+                } catch (Exception e) {
+                    Log.e("Nav Error", e.toString());
+                }
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        //return super.onOptionsItemSelected(item);
     }
 }

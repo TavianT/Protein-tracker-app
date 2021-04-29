@@ -19,8 +19,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-//        myToolbar.inflateMenu(R.menu.menu);
-//        myToolbar.setOnMenuItemClickListener(this::onOptionsItemSelected);
         setSupportActionBar(myToolbar);
 
     }
@@ -34,12 +32,22 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_addDailyProtein:
-                Log.d("Action", "onOptionsItemSelected: addDailyProtein selected");
+            case R.id.action_viewDailyProtein:
+                Log.d("Action", "onOptionsItemSelected: viewDailyProtein selected");
+                try {
+                    Navigation.findNavController(this, R.id.fragment).navigate(R.id.action_homeFragment_to_viewDailyProteinFragment);
+                }catch (Exception e) {
+                    Log.e("Nav Error", e.toString());
+                }
                 break;
             case R.id.action_addFood:
                 Log.d("Action", "onOptionsItemSelected: addFood selected");
-                Navigation.findNavController(this, R.id.fragment).navigate(R.id.action_homeFragment_to_addFoodFragment);
+                try {
+                    Navigation.findNavController(this, R.id.fragment).navigate(R.id.action_homeFragment_to_addFoodFragment);
+                } catch (Exception e) {
+                    Log.e("Nav Error", e.toString());
+                }
+
                 break;
             default:
                 return super.onOptionsItemSelected(item);
