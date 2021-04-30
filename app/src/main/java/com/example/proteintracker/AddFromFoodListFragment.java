@@ -52,30 +52,12 @@ public class AddFromFoodListFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_add_from_food_list, container, false);
         foodNames = new ArrayList<String>();
         protein = new ArrayList<Double>();
+        foodList = new ArrayList<Food>();
         recyclerView = v.findViewById(R.id.foodListRecyclerView);
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        executor.submit(() -> {
-            AppDatabase db = AppDatabase.getInstance(requireContext());
-            FoodDAO dao = db.foodDAO();
-            foodList = dao.getAll();
-        });
-        try {
-            Log.i("Executor obj", "attempt to shutdown executor");
-            executor.shutdown();
-            executor.awaitTermination(15, TimeUnit.SECONDS);
-        } catch (InterruptedException e) {
-            Log.e("Executor obj", "Task interrupted: " + e.toString());
-        } finally {
-            if (!executor.isTerminated()) {
-                Log.e("Executor obj", "Cancel non finished tasks");
-            }
-            executor.shutdownNow();
-            Log.d("Executor obj", "shutdown finished");
-
-        }
+        FoodController controller = new FoodController(requireContext());
+        foodList = controller.getAllFood();
         for (final Food food : foodList) {
             foodNames.add(food.foodName);
-            Log.d("Food Table", food.foodName);
             protein.add(food.protein);
         }
         FoodListAdapter adapter = new FoodListAdapter(requireContext(),foodNames,protein);

@@ -63,14 +63,13 @@ public class AddFoodFragment extends Fragment implements View.OnClickListener {
                 Toast.makeText(requireContext(),"Food name or protein invalid. Please retry.", Toast.LENGTH_LONG).show();
             } else {
                 double proteinDouble = Double.parseDouble(proteinString);
-                Food food = new Food(foodNameString, proteinDouble);
-                new Thread(() -> {
-                    AppDatabase db = AppDatabase.getInstance(requireContext());
-                    FoodDAO dao = db.foodDAO();
-                    dao.insertFood(food);
-                }).start();
-                Log.d("DB", "Food inserted");
-                Toast.makeText(requireContext(),"Food added successfully", Toast.LENGTH_LONG).show();
+                FoodController controller = new FoodController(requireContext());
+                boolean process_ok = controller.createFood(foodNameString, proteinDouble);
+                if (process_ok) {
+                    Toast.makeText(requireContext(),"Food added successfully", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(requireContext(),"Error adding food to database, please retry later", Toast.LENGTH_LONG).show();
+                }
                 foodName.setText("");
                 proteinGrams.setText("");
             }
