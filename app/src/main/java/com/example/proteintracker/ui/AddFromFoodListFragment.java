@@ -1,4 +1,4 @@
-package com.example.proteintracker;
+package com.example.proteintracker.ui;
 
 import android.os.Bundle;
 
@@ -11,12 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.time.LocalDate;
+import com.example.proteintracker.model.Food;
+import com.example.proteintracker.controller.FoodController;
+import com.example.proteintracker.ui.adapter.FoodListAdapter;
+import com.example.proteintracker.R;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,9 +59,10 @@ public class AddFromFoodListFragment extends Fragment {
         foodList = controller.getAllFood();
         for (final Food food : foodList) {
             foodNames.add(food.foodName);
+            Log.d("foodNames", food.foodName);
             protein.add(food.protein);
         }
-        FoodListAdapter adapter = new FoodListAdapter(requireContext(),foodNames,protein);
+        FoodListAdapter adapter = new FoodListAdapter(requireContext(), foodList);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         return v;

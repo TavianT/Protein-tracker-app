@@ -1,7 +1,11 @@
-package com.example.proteintracker;
+package com.example.proteintracker.controller;
 
 import android.content.Context;
 import android.util.Log;
+
+import com.example.proteintracker.AppDatabase;
+import com.example.proteintracker.model.Food;
+import com.example.proteintracker.model.dao.FoodDao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 public class FoodController {
     Context context;
 
-    FoodController(Context context){
+    public FoodController(Context context){
         this.context = context;
     }
 
@@ -22,7 +26,7 @@ public class FoodController {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.submit(() -> {
             AppDatabase db = AppDatabase.getInstance(context);
-            FoodDAO dao = db.foodDAO();
+            FoodDao dao = db.foodDAO();
             dao.insertFood(food);
             Log.d("DB", "Food inserted");
         });
@@ -48,7 +52,7 @@ public class FoodController {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.submit(() -> {
             AppDatabase db = AppDatabase.getInstance(context);
-            FoodDAO dao = db.foodDAO();
+            FoodDao dao = db.foodDAO();
             foodList.addAll(dao.getAll());
         });
         try {

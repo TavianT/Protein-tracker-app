@@ -1,4 +1,4 @@
-package com.example.proteintracker;
+package com.example.proteintracker.ui;
 
 import android.os.Bundle;
 
@@ -14,6 +14,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.proteintracker.controller.FoodController;
+import com.example.proteintracker.R;
+import com.example.proteintracker.Validator;
 
 /**
  * A simple {@link Fragment} subclass.

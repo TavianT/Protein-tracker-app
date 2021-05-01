@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.proteintracker.HomeFragment"
+        android:name="com.example.proteintracker.ui.HomeFragment"
         android:label="Protein Tracker"
         tools:layout="@layout/fragment_home" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/addFoodFragment"
-        android:name="com.example.proteintracker.AddFoodFragment"
+        android:name="com.example.proteintracker.ui.AddFoodFragment"
         android:label="fragment_add_food"
         tools:layout="@layout/fragment_add_food" >
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/viewDailyProteinFragment"
-        android:name="com.example.proteintracker.ViewDailyProteinFragment"
+        android:name="com.example.proteintracker.ui.ViewDailyProteinFragment"
         android:label="fragment_view_daily_protein"
         tools:layout="@layout/fragment_view_daily_protein" >
         <action
@@ -40,7 +40,11 @@
     </fragment>
     <fragment
         android:id="@+id/addFromFoodListFragment"
-        android:name="com.example.proteintracker.AddFromFoodListFragment"
+        android:name="com.example.proteintracker.ui.AddFromFoodListFragment"
         android:label="fragment_add_from_food_list"
-        tools:layout="@layout/fragment_add_from_food_list" />
+        tools:layout="@layout/fragment_add_from_food_list" >
+        <action
+            android:id="@+id/action_addFromFoodListFragment_to_viewDailyProteinFragment"
+            app:destination="@id/viewDailyProteinFragment" />
+    </fragment>
 </navigation>

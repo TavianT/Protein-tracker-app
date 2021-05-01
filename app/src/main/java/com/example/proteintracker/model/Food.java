@@ -1,4 +1,4 @@
-package com.example.proteintracker;
+package com.example.proteintracker.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -15,7 +15,7 @@ public class Food {
     @ColumnInfo(name = "protein")
     public double protein;
 
-    Food(String foodName, double protein) {
+    public Food(String foodName, double protein) {
         this.foodName = foodName;
         this.protein = protein;
     }

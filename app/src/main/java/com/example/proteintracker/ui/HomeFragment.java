@@ -1,18 +1,15 @@
-package com.example.proteintracker;
+package com.example.proteintracker.ui;
 
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.proteintracker.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
