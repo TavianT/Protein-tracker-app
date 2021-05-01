@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class FoodController {
     Context context;
@@ -70,5 +71,30 @@ public class FoodController {
 
         }
         return foodList;
+    }
+
+    public Food getFoodById(int id) {
+        AtomicReference<Food> food = new AtomicReference<Food>();
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.submit(() -> {
+            AppDatabase db = AppDatabase.getInstance(context);
+            FoodDao dao = db.foodDAO();
+            food.set(dao.getFood(id));
+        });
+        try {
+            Log.i("Executor obj", "attempt to shutdown executor");
+            executor.shutdown();
+            executor.awaitTermination(15, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            Log.e("Executor obj", "Task interrupted: " + e.toString());
+        } finally {
+            if (!executor.isTerminated()) {
+                Log.e("Executor obj", "Cancel non finished tasks");
+            }
+            executor.shutdownNow();
+            Log.d("Executor obj", "shutdown finished");
+
+        }
+        return food.get();
     }
 }

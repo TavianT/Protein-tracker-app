@@ -14,6 +14,9 @@ public interface DailyProteinDao {
     @Query("SELECT * FROM dailyprotein")
     List<DailyProtein> getAll();
 
+    @Query("SELECT * FROM dailyprotein WHERE date = date('now')")
+    List<DailyProtein> getAllCurrent();
+
     @Insert
     void insertDailyProtein(DailyProtein dp);
 
