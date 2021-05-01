@@ -13,6 +13,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.proteintracker.controller.DailyProteinController;
+import com.example.proteintracker.controller.FoodController;
 import com.example.proteintracker.model.Food;
 import com.example.proteintracker.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -65,6 +66,19 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodLi
                         Log.e("Nav error", e.toString());
                     }
                 }
+            }
+        });
+
+        holder.deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FoodController controller = new FoodController(context);
+                controller.deleteFood(foodList.get(holder.getAdapterPosition()));
+                protein.remove(holder.getAdapterPosition());
+                food.remove(holder.getAdapterPosition());
+                foodList.remove(holder.getAdapterPosition());
+                notifyItemRemoved(holder.getAdapterPosition());
+                notifyItemRangeChanged(holder.getAdapterPosition(), foodList.size());
             }
         });
 
