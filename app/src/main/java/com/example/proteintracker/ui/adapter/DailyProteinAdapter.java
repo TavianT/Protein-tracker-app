@@ -46,7 +46,13 @@ public class DailyProteinAdapter extends RecyclerView.Adapter<DailyProteinAdapte
     public void onBindViewHolder(@NonNull DailyProteinViewHolder holder, int position) {
         holder.dpCardTextView.setText(food.get(position));
         LocalDateTime time = dpList.get(position).date;
-        String timeString = String.valueOf(time.getHour())  + ":" + String.valueOf(time.getMinute());
+        int minute = time.getMinute();
+        String minuteString = "";
+        if (minute < 10) {
+            minuteString += "0";
+        }
+        minuteString += String.valueOf(minute);
+        String timeString = String.valueOf(time.getHour())  + ":" + minuteString;
         String infoText = grams.get(position).toString() + " grams at " + timeString;
         holder.dpInfoCardView.setText(infoText);
 
