@@ -18,7 +18,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
  */
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
-    FloatingActionButton addProteinButton;
+    //temp
+    final double PROTEIN_TARGET = 150;
 
     public HomeFragment() {
         // Required empty public constructor
