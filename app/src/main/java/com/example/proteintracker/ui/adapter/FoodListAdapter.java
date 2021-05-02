@@ -56,7 +56,7 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodLi
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int foodId = foodList.get(position).id;
+                int foodId = foodList.get(holder.getAdapterPosition()).id;
                 DailyProteinController controller = new DailyProteinController(context);
                 boolean process_ok = controller.CreateDailyProtein(foodId, LocalDateTime.now());
                 if (process_ok) {
