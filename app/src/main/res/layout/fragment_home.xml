@@ -95,7 +95,7 @@
                     android:text="@string/consumed" />
 
                 <TextView
-                    android:id="@+id/comsumedGramsTextView"
+                    android:id="@+id/consumedGramsTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"

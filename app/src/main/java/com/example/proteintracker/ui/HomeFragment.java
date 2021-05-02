@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.example.proteintracker.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -20,6 +21,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     //temp
     final double PROTEIN_TARGET = 150;
+
+    EditText targetTextView, remainingTextView, consumedTextView;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -49,6 +52,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
+        targetTextView = v.findViewById(R.id.targetGramsTextView);
+        remainingTextView = v.findViewById(R.id.remainingGramsTextView);
+        consumedTextView = v.findViewById(R.id.consumedGramsTextView);
         return v;
     }
 
