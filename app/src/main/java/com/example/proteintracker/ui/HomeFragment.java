@@ -60,6 +60,8 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
+        consumedGrams = 0;
+        remainingGrams = 0;
         targetTextView = v.findViewById(R.id.targetGramsTextView);
         remainingTextView = v.findViewById(R.id.remainingGramsTextView);
         consumedTextView = v.findViewById(R.id.consumedGramsTextView);

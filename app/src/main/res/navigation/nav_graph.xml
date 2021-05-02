@@ -24,7 +24,9 @@
         tools:layout="@layout/fragment_add_food" >
         <action
             android:id="@+id/action_addFoodFragment_to_viewDailyProteinFragment"
-            app:destination="@id/viewDailyProteinFragment" />
+            app:destination="@id/viewDailyProteinFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@+id/viewDailyProteinFragment"/>
     </fragment>
     <fragment
         android:id="@+id/viewDailyProteinFragment"
@@ -33,7 +35,9 @@
         tools:layout="@layout/fragment_view_daily_protein" >
         <action
             android:id="@+id/action_viewDailyProteinFragment_to_addFoodFragment"
-            app:destination="@id/addFoodFragment" />
+            app:destination="@id/addFoodFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@+id/addFoodFragment"/>
         <action
             android:id="@+id/action_viewDailyProteinFragment_to_addFromFoodListFragment"
             app:destination="@id/addFromFoodListFragment" />
@@ -45,9 +49,13 @@
         tools:layout="@layout/fragment_add_from_food_list" >
         <action
             android:id="@+id/action_addFromFoodListFragment_to_viewDailyProteinFragment"
-            app:destination="@id/viewDailyProteinFragment" />
+            app:destination="@id/viewDailyProteinFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@+id/viewDailyProteinFragment"/>
         <action
             android:id="@+id/action_addFromFoodListFragment_to_addFoodFragment"
-            app:destination="@id/addFoodFragment" />
+            app:destination="@id/addFoodFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@+id/addFoodFragment"/>
     </fragment>
 </navigation>
