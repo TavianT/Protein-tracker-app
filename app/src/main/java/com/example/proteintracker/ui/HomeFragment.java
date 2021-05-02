@@ -1,5 +1,6 @@
 package com.example.proteintracker.ui;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -17,6 +18,8 @@ import com.anychart.AnyChartView;
 import com.anychart.chart.common.dataentry.DataEntry;
 import com.anychart.chart.common.dataentry.ValueDataEntry;
 import com.anychart.charts.Pie;
+import com.anychart.graphics.vector.Fill;
+import com.anychart.graphics.vector.GradientKey;
 import com.example.proteintracker.R;
 import com.example.proteintracker.controller.DailyProteinController;
 import com.example.proteintracker.controller.FoodController;
@@ -95,29 +98,25 @@ public class HomeFragment extends Fragment {
         targetTextView.setText(targetString);
         remainingTextView.setText(remainingString);
         consumedTextView.setText(consumedString);
-        boolean pieDone = setPieChart();
-        if (pieDone) {
-            Log.d("pie done", String.valueOf(pieDone));
-        }
+        setPieChart();
         //updatePieChart();
         return v;
     }
 
-    private boolean setPieChart() {
+    private void setPieChart() {
         pie = AnyChart.pie();
         List<DataEntry> dataEntries = new ArrayList<DataEntry>();
-        Log.d("remaining in pie", String.valueOf(remainingGrams));
-        Log.d("consumed in pie", String.valueOf(consumedGrams));
         dataEntries.add(new ValueDataEntry("Consumed", consumedGrams));
         dataEntries.add(new ValueDataEntry("Remaining", remainingGrams));
+
         pie.data(dataEntries);
+        //pie.credits().enabled(false);
         pie.labels().enabled(false);
         //pie.tooltip().enabled(false);
         pie.legend().enabled(false);
         pie.outline().enabled(false);
 
         pieChartView.setChart(pie);
-        return true;
     }
 
     private void updatePieChart() {
