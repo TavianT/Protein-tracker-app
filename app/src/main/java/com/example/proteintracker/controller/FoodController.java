@@ -100,6 +100,31 @@ public class FoodController {
         return food.get();
     }
 
+    public List<Food> getFoodsById(List<Integer> ids) {
+        List<Food> foodList = new ArrayList<>();
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.submit(() -> {
+            AppDatabase db = AppDatabase.getInstance(context);
+            FoodDao dao = db.foodDAO();
+            foodList.addAll(dao.getAllFoodsById(ids));
+        });
+        try {
+            Log.i("Executor obj", "attempt to shutdown executor");
+            executor.shutdown();
+            executor.awaitTermination(15, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            Log.e("Executor obj", "Task interrupted: " + e.toString());
+        } finally {
+            if (!executor.isTerminated()) {
+                Log.e("Executor obj", "Cancel non finished tasks");
+            }
+            executor.shutdownNow();
+            Log.d("Executor obj", "shutdown finished");
+
+        }
+        return foodList;
+    }
+
     public List<Double> getProteinById(List<Integer> ids) {
         List<Double> protein = new ArrayList<Double>();
         ExecutorService executor = Executors.newSingleThreadExecutor();

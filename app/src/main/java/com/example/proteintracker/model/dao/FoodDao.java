@@ -20,6 +20,9 @@ public interface FoodDao {
     @Query("SELECT protein FROM food WHERE id IN(:ids)")
     List<Double> getAllProtein(List<Integer> ids);
 
+    @Query("SELECT * FROM food WHERE id IN(:ids)")
+    List<Food> getAllFoodsById(List<Integer> ids);
+
     @Insert
     void insertFood(Food food);
 

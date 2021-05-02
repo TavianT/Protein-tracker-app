@@ -64,13 +64,22 @@ public class ViewDailyProteinFragment extends Fragment {
         recyclerView = v.findViewById(R.id.dailyProteinRecyclerView);
         DailyProteinController controller = new DailyProteinController(requireContext());
         dpList = controller.getCurrentDailyProtein();
-        //dpList = controller.getAllDailyProtein(); //FIXME: change to current date
         FoodController foodController = new FoodController(requireContext());
+        List<Integer> ids = new ArrayList<>();
         for (final DailyProtein dp: dpList) {
-            Food food = foodController.getFoodById(dp.foodId);
+            ids.add(dp.foodId);
+            //Food food = foodController.getFoodBsyId(dp.foodId);
+            //foodNames.add(food.foodName);
+            //protein.add(food.protein);
+        }
+
+        List<Food> foodList = new ArrayList<>(foodController.getFoodsById(ids));
+        for (final Food food: foodList) {
             foodNames.add(food.foodName);
             protein.add(food.protein);
         }
+
+
         DailyProteinAdapter adapter = new DailyProteinAdapter(requireContext(), dpList, foodNames, protein);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
