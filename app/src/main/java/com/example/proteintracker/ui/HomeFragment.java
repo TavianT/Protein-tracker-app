@@ -8,21 +8,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.proteintracker.R;
+import com.example.proteintracker.controller.DailyProteinController;
+import com.example.proteintracker.controller.FoodController;
+import com.example.proteintracker.model.DailyProtein;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment implements View.OnClickListener {
+public class HomeFragment extends Fragment {
 
     //temp
     final double PROTEIN_TARGET = 150;
+    double consumedGrams, remainingGrams;
 
-    EditText targetTextView, remainingTextView, consumedTextView;
+    TextView targetTextView, remainingTextView, consumedTextView;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -55,10 +63,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         targetTextView = v.findViewById(R.id.targetGramsTextView);
         remainingTextView = v.findViewById(R.id.remainingGramsTextView);
         consumedTextView = v.findViewById(R.id.consumedGramsTextView);
+        List<DailyProtein> dpList = new ArrayList<DailyProtein>();
+        DailyProteinController dpController = new DailyProteinController(requireContext());
+        dpList = dpController.getCurrentDailyProtein();
+        FoodController foodController = new FoodController(requireContext());
+        for (final DailyProtein dp: dpList) {
+            double protein = foodController.getProteinById(dp.foodId);
+            consumedGrams += protein;
+        }
+        remainingGrams = PROTEIN_TARGET - consumedGrams;
+        targetTextView.setText(String.valueOf(PROTEIN_TARGET) + " g");
+        remainingTextView.setText(String.valueOf(remainingGrams) + " g");
+        consumedTextView.setText(String.valueOf(consumedGrams) + " g");
         return v;
-    }
-
-    @Override
-    public void onClick(View view) {
     }
 }
