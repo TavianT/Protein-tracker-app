@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.util.Log;
@@ -71,6 +72,7 @@ public class AddFoodFragment extends Fragment implements View.OnClickListener {
                 boolean process_ok = controller.createFood(foodNameString, proteinDouble);
                 if (process_ok) {
                     Toast.makeText(requireContext(),"Food added successfully", Toast.LENGTH_LONG).show();
+                    Navigation.findNavController(requireView()).popBackStack();
                 } else {
                     Toast.makeText(requireContext(),"Error adding food to database, please retry later", Toast.LENGTH_LONG).show();
                 }
