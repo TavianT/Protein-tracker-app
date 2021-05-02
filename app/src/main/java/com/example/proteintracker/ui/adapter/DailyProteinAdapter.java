@@ -41,20 +41,24 @@ public class DailyProteinAdapter extends RecyclerView.Adapter<DailyProteinAdapte
         View v = inflater.inflate(R.layout.daily_protein_row, parent, false);
         return new DailyProteinViewHolder(v);
     }
-
+    
     @Override
     public void onBindViewHolder(@NonNull DailyProteinViewHolder holder, int position) {
-        holder.dpCardTextView.setText(food.get(position));
-        LocalDateTime time = dpList.get(position).date;
-        int minute = time.getMinute();
-        String minuteString = "";
-        if (minute < 10) {
-            minuteString += "0";
+        try {
+            holder.dpCardTextView.setText(food.get(holder.getAdapterPosition()));
+            LocalDateTime time = dpList.get(holder.getAdapterPosition()).date;
+            int minute = time.getMinute();
+            String minuteString = "";
+            if (minute < 10) {
+                minuteString += "0";
+            }
+            minuteString += String.valueOf(minute);
+            String timeString = String.valueOf(time.getHour())  + ":" + minuteString;
+            String infoText = grams.get(holder.getAdapterPosition()).toString() + " grams at " + timeString;
+            holder.dpInfoCardView.setText(infoText);
+        } catch (IndexOutOfBoundsException e) {
+            Log.e("DpAdapter", e.toString());
         }
-        minuteString += String.valueOf(minute);
-        String timeString = String.valueOf(time.getHour())  + ":" + minuteString;
-        String infoText = grams.get(position).toString() + " grams at " + timeString;
-        holder.dpInfoCardView.setText(infoText);
 
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override

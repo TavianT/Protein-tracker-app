@@ -67,14 +67,7 @@ public class ViewDailyProteinFragment extends Fragment {
         FoodController foodController = new FoodController(requireContext());
         List<Integer> ids = new ArrayList<>();
         for (final DailyProtein dp: dpList) {
-            ids.add(dp.foodId);
-            //Food food = foodController.getFoodBsyId(dp.foodId);
-            //foodNames.add(food.foodName);
-            //protein.add(food.protein);
-        }
-
-        List<Food> foodList = new ArrayList<>(foodController.getFoodsById(ids));
-        for (final Food food: foodList) {
+            Food food = foodController.getFoodById(dp.foodId);
             foodNames.add(food.foodName);
             protein.add(food.protein);
         }
