@@ -65,7 +65,6 @@ public class AddFromFoodListFragment extends Fragment {
         foodList = controller.getAllFood();
         for (final Food food : foodList) {
             foodNames.add(food.foodName);
-            Log.d("foodNames", food.foodName);
             protein.add(food.protein);
         }
         FoodListAdapter adapter = new FoodListAdapter(requireContext(), foodList);

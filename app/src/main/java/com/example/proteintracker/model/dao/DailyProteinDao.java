@@ -7,6 +7,7 @@ import androidx.room.Query;
 
 import com.example.proteintracker.model.DailyProtein;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Dao
@@ -14,7 +15,7 @@ public interface DailyProteinDao {
     @Query("SELECT * FROM dailyprotein")
     List<DailyProtein> getAll();
 
-    @Query("SELECT * FROM dailyprotein WHERE date = date('now')")
+    @Query("SELECT * FROM dailyprotein WHERE datetime('now', 'start of day')")
     List<DailyProtein> getAllCurrent();
 
     @Insert

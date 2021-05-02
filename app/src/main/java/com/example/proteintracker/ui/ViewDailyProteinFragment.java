@@ -8,6 +8,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -62,7 +63,8 @@ public class ViewDailyProteinFragment extends Fragment {
         foodNames = new ArrayList<String>();
         recyclerView = v.findViewById(R.id.dailyProteinRecyclerView);
         DailyProteinController controller = new DailyProteinController(requireContext());
-        dpList = controller.getAllDailyProtein(); //FIXME: change to current date
+        dpList = controller.getCurrentDailyProtein();
+        //dpList = controller.getAllDailyProtein(); //FIXME: change to current date
         FoodController foodController = new FoodController(requireContext());
         for (final DailyProtein dp: dpList) {
             Food food = foodController.getFoodById(dp.foodId);
