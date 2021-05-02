@@ -73,8 +73,12 @@ public class HomeFragment extends Fragment {
         DailyProteinController dpController = new DailyProteinController(requireContext());
         dpList = dpController.getCurrentDailyProtein();
         FoodController foodController = new FoodController(requireContext());
+        List<Integer> foodIds = new ArrayList<>();
         for (final DailyProtein dp: dpList) {
-            double protein = foodController.getProteinById(dp.foodId);
+            foodIds.add(dp.foodId);
+        }
+        List<Double> proteins = new ArrayList<>(foodController.getProteinById(foodIds));
+        for (final double protein: proteins) {
             consumedGrams += protein;
         }
         if (consumedGrams < PROTEIN_TARGET) {
