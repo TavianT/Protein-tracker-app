@@ -15,7 +15,7 @@ public interface DailyProteinDao {
     @Query("SELECT * FROM dailyprotein")
     List<DailyProtein> getAll();
 
-    @Query("SELECT * FROM dailyprotein WHERE datetime('now', 'start of day')")
+    @Query("SELECT * FROM dailyprotein WHERE date >= datetime('now', 'start of day')")
     List<DailyProtein> getAllCurrent();
 
     @Insert
