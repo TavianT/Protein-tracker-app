@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.anychart.AnyChart;
@@ -40,9 +41,9 @@ public class HomeFragment extends Fragment {
     //temp
     final double PROTEIN_TARGET = 150;
     double consumedGrams, remainingGrams;
-    boolean refresh = false;
 
-    TextView targetTextView, remainingTextView, consumedTextView;
+    TextView targetTextView, remainingTextView, consumedTextView, percentageTextView;
+    ProgressBar progressBar;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -69,6 +70,8 @@ public class HomeFragment extends Fragment {
         targetTextView = v.findViewById(R.id.targetGramsTextView);
         remainingTextView = v.findViewById(R.id.remainingGramsTextView);
         consumedTextView = v.findViewById(R.id.consumedGramsTextView);
+        percentageTextView = v.findViewById(R.id.proteinPercentTextView);
+        progressBar = v.findViewById(R.id.proteinPercentProgressBar);
         List<DailyProtein> dpList = new ArrayList<DailyProtein>();
         DailyProteinController dpController = new DailyProteinController(requireContext());
         dpList = dpController.getCurrentDailyProtein();
@@ -85,6 +88,7 @@ public class HomeFragment extends Fragment {
         } else {
             remainingGrams = 0;
         }
+        setProgressBar();
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
         String targetString = String.valueOf(decimalFormat.format(PROTEIN_TARGET)) + " g";
         String remainingString = String.valueOf(decimalFormat.format(remainingGrams)) + " g";
@@ -93,5 +97,16 @@ public class HomeFragment extends Fragment {
         remainingTextView.setText(remainingString);
         consumedTextView.setText(consumedString);
         return v;
+    }
+
+    void setProgressBar() {
+        if (remainingGrams == 0) {
+            progressBar.setProgress(100);
+            percentageTextView.setText("100%");
+        } else {
+            int progress = (int) ((consumedGrams / PROTEIN_TARGET) * 100);
+            progressBar.setProgress(progress);
+            percentageTextView.setText(String.valueOf(progress) + "%");
+        }
     }
 }
