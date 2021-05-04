@@ -44,6 +44,7 @@ public class HomeFragment extends Fragment {
 
     TextView targetTextView, remainingTextView, consumedTextView, percentageTextView;
     ProgressBar progressBar;
+    boolean redraw = false;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -97,6 +98,21 @@ public class HomeFragment extends Fragment {
         remainingTextView.setText(remainingString);
         consumedTextView.setText(consumedString);
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (redraw) {
+            redraw = false;
+            setProgressBar();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        redraw = true;
     }
 
     void setProgressBar() {
