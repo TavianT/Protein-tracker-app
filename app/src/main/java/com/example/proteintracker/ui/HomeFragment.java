@@ -41,10 +41,8 @@ public class HomeFragment extends Fragment {
     final double PROTEIN_TARGET = 150;
     double consumedGrams, remainingGrams;
     boolean refresh = false;
-    Pie pie;
 
     TextView targetTextView, remainingTextView, consumedTextView;
-    AnyChartView pieChartView;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -68,11 +66,9 @@ public class HomeFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
         consumedGrams = 0;
         remainingGrams = 0;
-        //pie = AnyChart.pie();
         targetTextView = v.findViewById(R.id.targetGramsTextView);
         remainingTextView = v.findViewById(R.id.remainingGramsTextView);
         consumedTextView = v.findViewById(R.id.consumedGramsTextView);
-        pieChartView = v.findViewById(R.id.pieChart);
         List<DailyProtein> dpList = new ArrayList<DailyProtein>();
         DailyProteinController dpController = new DailyProteinController(requireContext());
         dpList = dpController.getCurrentDailyProtein();
@@ -89,8 +85,6 @@ public class HomeFragment extends Fragment {
         } else {
             remainingGrams = 0;
         }
-        Log.d("remaining", String.valueOf(remainingGrams));
-        Log.d("consumed", String.valueOf(consumedGrams));
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
         String targetString = String.valueOf(decimalFormat.format(PROTEIN_TARGET)) + " g";
         String remainingString = String.valueOf(decimalFormat.format(remainingGrams)) + " g";
@@ -98,34 +92,6 @@ public class HomeFragment extends Fragment {
         targetTextView.setText(targetString);
         remainingTextView.setText(remainingString);
         consumedTextView.setText(consumedString);
-        setPieChart();
-        //updatePieChart();
         return v;
-    }
-
-    private void setPieChart() {
-        pie = AnyChart.pie();
-        List<DataEntry> dataEntries = new ArrayList<DataEntry>();
-        dataEntries.add(new ValueDataEntry("Consumed", consumedGrams));
-        dataEntries.add(new ValueDataEntry("Remaining", remainingGrams));
-
-        pie.data(dataEntries);
-        pie.labels().enabled(false);
-        pie.legend().enabled(false);
-        pie.outline().enabled(false);
-
-        pieChartView.setChart(pie);
-    }
-
-    private void updatePieChart() {
-        final int delay = 500;
-        final Handler handler = new Handler();
-        final Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                setPieChart();
-            }
-        };
-        handler.postDelayed(runnable, delay);
     }
 }

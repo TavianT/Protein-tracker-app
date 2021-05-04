@@ -10,24 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.anychart.AnyChartView
-            android:id="@+id/pieChart"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:layout_marginStart="81dp"
-            android:layout_marginTop="72dp"
-            android:layout_marginEnd="80dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="412dp"
             android:layout_height="57dp"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="275dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pieChart">
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:id="@+id/linearLayout3"
