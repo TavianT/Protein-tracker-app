@@ -44,7 +44,7 @@
         android:layout_marginTop="60dp"
         android:layout_marginEnd="97dp"
         android:ems="10"
-        android:hint="Food in grams"
+        android:hint="Protein in grams"
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
