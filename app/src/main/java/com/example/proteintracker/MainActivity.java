@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_viewDailyProtein:
-                Log.d("Action", "onOptionsItemSelected: viewDailyProtein selected");
                 try {
                     Navigation.findNavController(this, R.id.fragment).navigate(R.id.action_homeFragment_to_viewDailyProteinFragment);
                 }catch (Exception e) {
@@ -41,13 +40,18 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.action_addFood:
-                Log.d("Action", "onOptionsItemSelected: addFood selected");
                 try {
                     Navigation.findNavController(this, R.id.fragment).navigate(R.id.action_homeFragment_to_addFoodFragment);
                 } catch (Exception e) {
                     Log.e("Nav Error", e.toString());
                 }
-
+                break;
+            case R.id.action_setProteinTarget:
+                try {
+                    Navigation.findNavController(this, R.id.fragment).navigate(R.id.action_homeFragment_to_setProteinFragment);
+                } catch (Exception e) {
+                    Log.e("Nav Error", e.toString());
+                }
                 break;
             default:
                 return super.onOptionsItemSelected(item);

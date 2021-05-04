@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFragment_to_viewDailyProteinFragment"
             app:destination="@id/viewDailyProteinFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_setProteinFragment"
+            app:destination="@id/setProteinFragment" />
     </fragment>
     <fragment
         android:id="@+id/addFoodFragment"
@@ -57,5 +60,16 @@
             app:destination="@id/addFoodFragment"
             app:popUpToInclusive="true"
             app:popUpTo="@+id/addFoodFragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/setProteinFragment"
+        android:name="com.example.proteintracker.ui.SetProteinFragment"
+        android:label="fragment_set_protein"
+        tools:layout="@layout/fragment_set_protein" >
+        <action
+            android:id="@+id/action_setProteinFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/homeFragment"/>
     </fragment>
 </navigation>
