@@ -9,6 +9,8 @@ import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,17 +85,8 @@ public class AddFoodFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_viewDailyProtein:
-                try {
-                    Navigation.findNavController(requireView()).navigate(R.id.action_addFoodFragment_to_viewDailyProteinFragment);
-                } catch (Exception e) {
-                    Log.e("Nav Error", e.toString());
-                }
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-        //return super.onOptionsItemSelected(item);
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        menu.clear();
+        super.onCreateOptionsMenu(menu, inflater);
     }
 }
