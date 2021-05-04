@@ -40,6 +40,7 @@ public class HomeFragment extends Fragment {
     //temp
     final double PROTEIN_TARGET = 150;
     double consumedGrams, remainingGrams;
+    boolean refresh = false;
     Pie pie;
 
     TextView targetTextView, remainingTextView, consumedTextView;
@@ -76,11 +77,10 @@ public class HomeFragment extends Fragment {
         DailyProteinController dpController = new DailyProteinController(requireContext());
         dpList = dpController.getCurrentDailyProtein();
         FoodController foodController = new FoodController(requireContext());
-        List<Integer> foodIds = new ArrayList<>();
+        List<Double> proteins = new ArrayList<>();
         for (final DailyProtein dp: dpList) {
-            foodIds.add(dp.foodId);
+            proteins.add(foodController.getProteinById(dp.foodId));
         }
-        List<Double> proteins = new ArrayList<>(foodController.getProteinById(foodIds));
         for (final double protein: proteins) {
             consumedGrams += protein;
         }
@@ -110,9 +110,7 @@ public class HomeFragment extends Fragment {
         dataEntries.add(new ValueDataEntry("Remaining", remainingGrams));
 
         pie.data(dataEntries);
-        //pie.credits().enabled(false);
         pie.labels().enabled(false);
-        //pie.tooltip().enabled(false);
         pie.legend().enabled(false);
         pie.outline().enabled(false);
 

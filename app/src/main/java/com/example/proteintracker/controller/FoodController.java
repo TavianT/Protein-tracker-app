@@ -125,13 +125,13 @@ public class FoodController {
         return foodList;
     }
 
-    public List<Double> getProteinById(List<Integer> ids) {
-        List<Double> protein = new ArrayList<Double>();
+    public double getProteinById(int id) {
+        AtomicReference<Double> protein = new AtomicReference<>((double) 0);
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.submit(() -> {
             AppDatabase db = AppDatabase.getInstance(context);
             FoodDao dao = db.foodDAO();
-            protein.addAll(dao.getAllProtein(ids));
+            protein.set(dao.getProtein(id));
         });
         try {
             Log.i("Executor obj", "attempt to shutdown executor");
@@ -147,7 +147,7 @@ public class FoodController {
             Log.d("Executor obj", "shutdown finished");
 
         }
-        return protein;
+        return protein.get();
     }
     //UPDATE
     //DELETE

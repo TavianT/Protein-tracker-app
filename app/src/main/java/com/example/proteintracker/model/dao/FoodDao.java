@@ -17,8 +17,8 @@ public interface FoodDao {
     @Query("SELECT * FROM food WHERE id = :id") //check if single = or double
     Food getFood(int id);
 
-    @Query("SELECT protein FROM food WHERE id IN(:ids)")
-    List<Double> getAllProtein(List<Integer> ids);
+    @Query("SELECT protein FROM food WHERE id = :id")
+    double getProtein(int id);
 
     @Query("SELECT * FROM food WHERE id IN(:ids)")
     List<Food> getAllFoodsById(List<Integer> ids);
