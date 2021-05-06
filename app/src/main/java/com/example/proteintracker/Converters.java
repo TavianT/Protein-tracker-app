@@ -25,4 +25,5 @@ public class Converters
         Log.d("Date to String converter", "localDateTimeToString: " + dateString);
         return dateString;
     }
+    //@TypeConverter
 }
