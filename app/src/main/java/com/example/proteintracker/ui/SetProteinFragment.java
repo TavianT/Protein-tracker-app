@@ -1,5 +1,7 @@
 package com.example.proteintracker.ui;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 
@@ -19,6 +21,8 @@ import android.widget.EditText;
 
 import com.example.proteintracker.R;
 import com.example.proteintracker.ui.adapter.DecimalDigitsInputFilter;
+
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,8 +62,16 @@ public class SetProteinFragment extends Fragment {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                double protein = Double.parseDouble(proteinEditText.getText().toString().trim());
+                try {
+                    String protein = proteinEditText.getText().toString().trim();
+                    SharedPreferences prefs = requireActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putString("proteinTarget", protein);
+                    editor.apply();
 
+                } catch (NumberFormatException e) {
+                    Log.e("NumberFormatException", Objects.requireNonNull(e.getMessage()));
+                }
                 Navigation.findNavController(requireView()).navigate(R.id.action_setProteinFragment_to_homeFragment);
             }
         });

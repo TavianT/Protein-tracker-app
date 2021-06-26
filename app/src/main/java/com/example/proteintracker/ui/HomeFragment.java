@@ -87,7 +87,7 @@ public class HomeFragment extends Fragment {
             consumedGrams += protein;
         }
         SharedPreferences prefs = requireActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
-        double proteinTarget = prefs.getFloat("proteinTarget",150);
+        proteinTarget = Double.parseDouble(prefs.getString("proteinTarget","150"));
         if (consumedGrams < proteinTarget) {
             remainingGrams = proteinTarget - consumedGrams;
         } else {
@@ -125,6 +125,9 @@ public class HomeFragment extends Fragment {
             percentageTextView.setText("100%");
         } else {
             int progress = (int) ((consumedGrams / proteinTarget) * 100);
+            Log.e("consumedGrams", String.valueOf(consumedGrams));
+            Log.e("proteinTarget", String.valueOf(proteinTarget));
+            Log.e("progress", String.valueOf(progress));
             progressBar.setProgress(progress);
             percentageTextView.setText(String.valueOf(progress) + "%");
         }

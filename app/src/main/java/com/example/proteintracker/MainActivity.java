@@ -21,11 +21,12 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
         boolean firstStart = prefs.getBoolean("firstStart", true);
+        Log.e("firstStart",String.valueOf(firstStart));
 
         if (firstStart) {
             //TODO: Set default target value
             SharedPreferences.Editor editor = prefs.edit();
-            editor.putFloat("proteinTarget", 200);
+            editor.putString("proteinTarget", "150");
             editor.putBoolean("firstStart", false);
             editor.apply();
 
