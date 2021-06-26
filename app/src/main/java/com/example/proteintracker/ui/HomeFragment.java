@@ -1,5 +1,7 @@
 package com.example.proteintracker.ui;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -39,8 +41,8 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
     //temp
-    final double PROTEIN_TARGET = 150;
-    double consumedGrams, remainingGrams;
+    //final double PROTEIN_TARGET = 150;
+    double consumedGrams, remainingGrams, proteinTarget;
 
     TextView targetTextView, remainingTextView, consumedTextView, percentageTextView;
     ProgressBar progressBar;
@@ -84,14 +86,16 @@ public class HomeFragment extends Fragment {
         for (final double protein: proteins) {
             consumedGrams += protein;
         }
-        if (consumedGrams < PROTEIN_TARGET) {
-            remainingGrams = PROTEIN_TARGET - consumedGrams;
+        SharedPreferences prefs = requireActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        double proteinTarget = prefs.getFloat("proteinTarget",150);
+        if (consumedGrams < proteinTarget) {
+            remainingGrams = proteinTarget - consumedGrams;
         } else {
             remainingGrams = 0;
         }
         setProgressBar();
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
-        String targetString = String.valueOf(decimalFormat.format(PROTEIN_TARGET)) + " g";
+        String targetString = String.valueOf(decimalFormat.format(proteinTarget)) + " g";
         String remainingString = String.valueOf(decimalFormat.format(remainingGrams)) + " g";
         String consumedString = String.valueOf(decimalFormat.format(consumedGrams)) + " g";
         targetTextView.setText(targetString);
@@ -120,7 +124,7 @@ public class HomeFragment extends Fragment {
             progressBar.setProgress(100);
             percentageTextView.setText("100%");
         } else {
-            int progress = (int) ((consumedGrams / PROTEIN_TARGET) * 100);
+            int progress = (int) ((consumedGrams / proteinTarget) * 100);
             progressBar.setProgress(progress);
             percentageTextView.setText(String.valueOf(progress) + "%");
         }

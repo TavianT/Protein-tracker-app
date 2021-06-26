@@ -19,12 +19,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SharedPreferences prefs = getSharedPreferences("target_prefs", MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
         boolean firstStart = prefs.getBoolean("firstStart", true);
 
         if (firstStart) {
             //TODO: Set default target value
             SharedPreferences.Editor editor = prefs.edit();
+            editor.putFloat("proteinTarget", 200);
             editor.putBoolean("firstStart", false);
             editor.apply();
 
